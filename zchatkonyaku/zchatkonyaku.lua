@@ -1,3 +1,6 @@
+--******************************************************
+-- zchatextendより遅くに読み込む必要あるのでz始まり
+--******************************************************
 --アドオン名（大文字）
 local addonName = "CHATKONYAKU";
 local addonNameLower = string.lower(addonName);
