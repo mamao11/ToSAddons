@@ -2,7 +2,7 @@
 local addonName = "CHATKONYAKU";
 local addonNameLower = string.lower(addonName);
 --作者名
-local author = "mos";
+local author = "mamao";
 
 --アドオン内で使用する領域を作成。以下、ファイル内のスコープではグローバル変数gでアクセス可
 _G["ADDONS"] = _G["ADDONS"] or {};
@@ -73,12 +73,6 @@ function ZCHATKONYAKU_ON_INIT(addon, frame)
 	--翻訳準備（マップロードの度にコールすれば翻訳切断時にリログで復帰できる）
 	g.pipe = true;
 	KONYAKU_TRANSLATE_START();
-
-	--ゲーム開始３秒後
-	--addon:RegisterMsg("GAME_START_3SEC", "KONYAKU_CHAT_HOOK");
-
-	--指定秒後に関数実行
-	--	ReserveScript("KONYAKU_CHAT_HOOK()", 3);
 
 
 	--タイマー準備
@@ -374,8 +368,10 @@ function KONYAKU_TRANSLATE_RECV(frame)
 					--print("text:" .. text);
 					--temp_file(text, "2");
 
-					--なぜ変換前は青指定なのに黄色で表現されるのだろう？
-					msg = msg:gsub("{#0000FF}{img ","{#FFFF00}{img ");
+					--吹き出しモードでないなら色変え
+					if not is_baloon then
+						msg = msg:gsub("{#0000FF}{img ","{#FFFF00}{img ");
+					end
 
 					if ms == 0 then
 						--APPEND
@@ -385,6 +381,10 @@ function KONYAKU_TRANSLATE_RECV(frame)
 							--吹き出しモードならnlを含まない
 							text = text:gsub('^(.*)({/}{/})$', '%1（' .. msg  .. '）%2');
 						else
+							if cmd_nm ~= "" then
+								msg = cmd_nm .. ' : ' .. msg;
+							end
+
 							--通常チャットならnl含む
 							text = text:gsub('^(.*)({nl}{/}{/}{nl}{/})$', '%1{#999999}（' .. msg  .. '）{/}%2');
 							text = text:gsub('^(.*)({nl}{/}{/}{nl})$', '%1{#999999}（' .. msg  .. '）{/}%2');
