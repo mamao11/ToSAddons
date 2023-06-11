@@ -67,6 +67,9 @@ ToSを起動。MAPにログインしてみる
 ![image](https://github.com/mamao11/ToSAddons/assets/36460192/c791f97a-24d6-494d-9104-0f57e0c7b1a8)  
 上の例は**原文を置き換え**の例。赤い菱形は翻訳された文章を示すマーク。  
 <br>
+![image](https://github.com/mamao11/ToSAddons/assets/36460192/56667fea-6bd1-49d4-91eb-7173c8d70ecd)  
+こっちは**原文に追記**の例。後ろに括弧付きでやや暗い白で表現される
+<br>
 ## ［トラブルかな？］
 **1. パーティ名が翻訳できてない？**  
   　パーティ名はあえて翻訳してません。翻訳してしまうと別物になってクリックしても機能しないと思うので。  
@@ -82,3 +85,12 @@ ToSを起動。MAPにログインしてみる
   　![image](https://github.com/mamao11/ToSAddons/assets/36460192/3ef36763-48c4-412b-bb11-257f5942915c)
 <br>
   　制限にひっかかったら諦めて翻訳APIを切り替えてください。  
+<br>
+## ［翻訳API設定の必要な情報ってどこにあるの？］
+### DeepLの場合はアカウント情報の中
+![image](https://github.com/mamao11/ToSAddons/assets/36460192/8520e950-4162-4253-bc09-487922a17035)  
+<br>
+下の方にスクロールすると**DeepL APIで使用する認証キー**の欄がある。  
+![image](https://github.com/mamao11/ToSAddons/assets/36460192/dff801c9-b8ea-4e43-82dd-d7436a584a7d)  
+
+
