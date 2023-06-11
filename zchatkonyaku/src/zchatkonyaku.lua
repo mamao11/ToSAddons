@@ -349,6 +349,9 @@ function KONYAKU_TRANSLATE_RECV(frame)
 			local clustername = "cluster_" .. chat_id;
 			--print("debug:" .. clustername);
 
+			--発言者枠（吹き出しモード時使用）
+			local cmdn = nil;
+
 			local chatCtrl = GET_CHILD(groupbox, clustername);
 			--枠が見つかり翻訳文字があるならば処理
 			if chatCtrl ~= nil and msg ~= ' ' then
@@ -358,11 +361,13 @@ function KONYAKU_TRANSLATE_RECV(frame)
 
 				--とらハムさんのchatextends判定
 				if ADDONS.torahamu ~= nil then
-						--print("torahamu found.");
+					--print("torahamu found.");
 					if ADDONS.torahamu.CHATEXTENDS ~= nil then
 						--print("chatextends found.");
 						if ADDONS.torahamu.CHATEXTENDS.settings.BALLON_FLG then
 							--print("chatextends ballon mode.");
+							--名前枠取得
+							cmdn = GET_CHILD(chatCtrl, "name", "ui::CRichText");
 							--吹き出しモードだとgroupboxが間に入る
 							chatCtrl = GET_CHILD(chatCtrl, "bg", "ui::CGroupBox");
 							is_baloon = true;
@@ -389,8 +394,15 @@ function KONYAKU_TRANSLATE_RECV(frame)
 
 						--追記
 						if is_baloon then
+
+							if cmd_nm ~= "" and cmdn ~= nil then
+								local cmt = cmdn:GetText();
+								cmt = cmt:gsub('^(.*)({/})$', '%1（' .. cmd_nm  .. '）%2');
+								cmdn:SetText(cmt);
+							end
 							--吹き出しモードならnlを含まない
 							text = text:gsub('^(.*)({/}{/})$', '%1（' .. msg  .. '）%2');
+
 						else
 							if cmd_nm ~= "" then
 								msg = cmd_nm .. ' : ' .. msg;
@@ -409,29 +421,40 @@ function KONYAKU_TRANSLATE_RECV(frame)
 						--print("text:" .. text);
 						--temp_file(text, "2");
 
-						if cmd_nm ~= "" then
-							msg = cmd_nm .. ' : ' .. msg;
-						end
+						if is_baloon then
 
-						--書き換え
-						for i = 1, #g.MSG_PATTERN do
-							local type_pat = "%[" .. g.MSG_PATTERN[i] .. "%]";
-							--print(type_pat);
-
-							if text:match( type_pat ) then
-								--print("match " .. i);
-
-								if is_baloon then
-									--吹き出しモードならnlを含まない
-									text = text:gsub('^(.*)(' .. type_pat .. ')(.*)({/}{/})$', '%1%2 {#FF0000}◆{/}(' .. msg  .. ')%4');
-								else
-									text = text:gsub('^(.*)(' .. type_pat .. ')(.*)({nl}{/}{/}{nl}{/})$', '%1%2 {#FF0000}◆{/}(' .. msg  .. ')%4');
-									text = text:gsub('^(.*)(' .. type_pat .. ')(.*)({nl}{/}{/}{nl})$', '%1%2 {#FF0000}◆{/}(' .. msg  .. ')%4');
-									text = text:gsub('^(.*)(' .. type_pat .. ')(.*)({nl}{/}{/})$', '%1%2 {#FF0000}◆{/}(' .. msg  .. ')%4');
-								end
-
-								break;
+							if cmd_nm ~= "" and cmdn ~= nil then
+								cmdn:SetText('{@st61}'..cmd_nm..'{/}');
 							end
+							text = text:gsub('^({.-}{.-}{.-})(.*)({/}{/})$', '%1 {#FF0000}◆{/}(' .. msg  .. ')%3');
+
+						else
+
+							if cmd_nm ~= "" then
+								msg = cmd_nm .. ' : ' .. msg;
+							end
+
+							--書き換え
+							for i = 1, #g.MSG_PATTERN do
+								local type_pat = "%[" .. g.MSG_PATTERN[i] .. "%]";
+								--print(type_pat);
+
+								if text:match( type_pat ) then
+									--print("match " .. i);
+
+									if is_baloon then
+										--吹き出しモードならnlを含まない
+										text = text:gsub('^(.*)(' .. type_pat .. ')(.*)({/}{/})$', '%1%2 {#FF0000}◆{/}(' .. msg  .. ')%4');
+									else
+										text = text:gsub('^(.*)(' .. type_pat .. ')(.*)({nl}{/}{/}{nl}{/})$', '%1%2 {#FF0000}◆{/}(' .. msg  .. ')%4');
+										text = text:gsub('^(.*)(' .. type_pat .. ')(.*)({nl}{/}{/}{nl})$', '%1%2 {#FF0000}◆{/}(' .. msg  .. ')%4');
+										text = text:gsub('^(.*)(' .. type_pat .. ')(.*)({nl}{/}{/})$', '%1%2 {#FF0000}◆{/}(' .. msg  .. ')%4');
+									end
+
+									break;
+								end
+							end
+
 						end
 						txt:SetTextByKey("text", text);
 
