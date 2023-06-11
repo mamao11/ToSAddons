@@ -197,17 +197,22 @@ function KONYAKU_CHAT_HOOK(frame, msg)
 		--print("msg7 " .. g.chat_id .. '/' .. tempMsg);
 		--翻訳アプリへ送信
 		KONYAKU_TRANSLATE_SEND(cmdName, tempMsg, chat_id);
-		temp_file(tempMsg, "1");
+		
+		--[[
+		--temp_file(tempMsg, "1");
 
 		local clustername = "cluster_" .. chat_id;
 		local chatCtrl = GET_CHILD(groupbox, clustername);
 		--とらハムさんのchatextends判定
-		if ADDONS.torahamu.CHATEXTENDS ~= nil then
-			if ADDONS.torahamu.CHATEXTENDS.settings.BALLON_FLG then
-				--吹き出しモードだとgroupboxが間に入る
-				chatCtrl = GET_CHILD(chatCtrl, "bg", "ui::CGroupBox");
+		if ADDONS.torahamu ~= nil then
+			if ADDONS.torahamu.CHATEXTENDS ~= nil then
+				if ADDONS.torahamu.CHATEXTENDS.settings.BALLON_FLG then
+					--吹き出しモードだとgroupboxが間に入る
+					chatCtrl = GET_CHILD(chatCtrl, "bg", "ui::CGroupBox");
+				end
 			end
 		end
+		--]]
 		--local txt = GET_CHILD(chatCtrl, "text", "ui::CRichText");
 		--local text = txt:GetText();
 		--temp_file(text, "2");
@@ -347,18 +352,21 @@ function KONYAKU_TRANSLATE_RECV(frame)
 			local chatCtrl = GET_CHILD(groupbox, clustername);
 			--枠が見つかり翻訳文字があるならば処理
 			if chatCtrl ~= nil and msg ~= ' ' then
-				--print("chatCtrl is null");
+				--print("chatCtrl found");
 
 				local is_baloon = false;
 
 				--とらハムさんのchatextends判定
-				if ADDONS.torahamu.CHATEXTENDS ~= nil then
-					--print("chatextends found.");
-					if ADDONS.torahamu.CHATEXTENDS.settings.BALLON_FLG then
-						--print("chatextends ballon mode.");
-						--吹き出しモードだとgroupboxが間に入る
-						chatCtrl = GET_CHILD(chatCtrl, "bg", "ui::CGroupBox");
-						is_baloon = true;
+				if ADDONS.torahamu ~= nil then
+						--print("torahamu found.");
+					if ADDONS.torahamu.CHATEXTENDS ~= nil then
+						--print("chatextends found.");
+						if ADDONS.torahamu.CHATEXTENDS.settings.BALLON_FLG then
+							--print("chatextends ballon mode.");
+							--吹き出しモードだとgroupboxが間に入る
+							chatCtrl = GET_CHILD(chatCtrl, "bg", "ui::CGroupBox");
+							is_baloon = true;
+						end
 					end
 				end
 
