@@ -44,14 +44,13 @@ DeepLは個人情報の送信があり得る場合、有償サービスの契約
 3. 解凍したらToSTranslator.exeを起動  
 4. 注意事項をしっかり読む（※しっかり読んでね！）  
 5. 翻訳キー等を設定（※各翻訳サービスで登録した後に貰える情報を入れる）  
-![image](https://github.com/mamao11/ToSAddons/assets/36460192/c2588780-c5e9-4ae3-8cf7-c60a7ad1cd09)  
+  ![image](https://github.com/mamao11/ToSAddons/assets/36460192/e045aea2-76de-44bd-996f-08e7b392988c)  
 上記はみんなの自動翻訳の例。各サイトのどこ見たら良いかはこのページ最下部参照。
-
 6. 翻訳APIをプルダウンから指定  
-  ![image](https://github.com/mamao11/ToSAddons/assets/36460192/ff957da8-6f5d-4f00-94c1-0df0e004f392)
+  ![image](https://github.com/mamao11/ToSAddons/assets/36460192/ecb39d93-c414-4ef3-af71-cfa26f37264d)  
 
 7. ステータスボックスが青色（翻訳は緑色）になったらToS翻訳ツールの準備OK  
-![image](https://github.com/mamao11/ToSAddons/assets/36460192/02fc7a59-5f65-408c-bb73-b90ce7f5a7c7)
+  ![image](https://github.com/mamao11/ToSAddons/assets/36460192/a80330c5-5d86-45fe-916c-401c17386f1d)  
   
 #### ［ToSアドオンの導入］
 
@@ -67,20 +66,22 @@ ToSを起動。MAPにログインしてみる
 
 システムメッセージでこんな感じのメッセージが出る。  
   
-![image](https://github.com/mamao11/ToSAddons/assets/36460192/5af43927-27e5-4321-8f72-a81fdde8642b)  
+ ![image](https://github.com/mamao11/ToSAddons/assets/36460192/65304751-d020-4f7e-81cb-3dd1dbf0c8e3)  
 大事なのは送信-OK、受信-OKの文字  
 <br>
 そしてToS翻訳アプリのステータスボックスが青から緑に変われば接続OK  
   
-![image](https://github.com/mamao11/ToSAddons/assets/36460192/97b1e362-d763-46cb-8ffe-bbbf4c2b5c33)
+ ![image](https://github.com/mamao11/ToSAddons/assets/36460192/535c4ad7-45df-435f-a37e-feb59a1934ea)  
 
 あとは韓国語で発言されれば自動的に翻訳され、数秒後にチャットに反映される。  
   
-![image](https://github.com/mamao11/ToSAddons/assets/36460192/c791f97a-24d6-494d-9104-0f57e0c7b1a8)  
+ ![image](https://github.com/mamao11/ToSAddons/assets/36460192/2e86953e-63e0-4fc8-b751-bae8482899bb)  
 上の例は**原文を置き換え**の例。赤い菱形は翻訳された文章を示すマーク。  
 <br>
-![image](https://github.com/mamao11/ToSAddons/assets/36460192/56667fea-6bd1-49d4-91eb-7173c8d70ecd)  
+ ![image](https://github.com/mamao11/ToSAddons/assets/36460192/c943fa37-14ee-46bf-862e-ccafb1a57dfb)  
 こっちは**原文に追記**の例。後ろに括弧付きでやや暗い白で表現される
+<br>
+<br>
 <br>
 ## ［トラブルかな？］
 **1. パーティ名が翻訳できてない？**  
@@ -94,19 +95,23 @@ ToSを起動。MAPにログインしてみる
   　みんなの自動翻訳は日単位。DeepLは月単位の制限のもよう。  
 <br>
   　制限にひっかかるとToSチャット欄は「翻訳失敗」と表示され、ToS翻訳アプリにERROR表示が出ます。  
-  　![image](https://github.com/mamao11/ToSAddons/assets/36460192/3ef36763-48c4-412b-bb11-257f5942915c)
-<br>
   　制限にひっかかったら諦めて翻訳APIを切り替えてください。  
 <br>
-## ［翻訳API設定の必要な情報ってどこにあるの？］
-#### みんなの自動翻訳の場合はｘｘｘｘ
-サイトメンテナンス中のため後日記載<br>
 <br>
+<br>
+## ［翻訳API設定の必要な情報ってどこにあるの？］
+#### みんなの自動翻訳の場合はWebAPIページの中
+![image](https://github.com/mamao11/ToSAddons/assets/36460192/387e8e1f-5cd8-49c3-857e-b36cfc898a20)  
+ログイン後の雲マークをクリックし、言語を**韓国語→日本語**にし、対話NT（音声翻訳エンジン専用）の右端の青いiマークをクリック。  
+（※いくつか試したけどこれが一番自然に感じた）<br>
+<br>
+するとAPI Keyなどの情報が出てくる。  
+![image](https://github.com/mamao11/ToSAddons/assets/36460192/d2feda74-97a0-495d-95db-33fdf278a15c)  
 <br>
 #### DeepLの場合はアカウント情報の中
-![image](https://github.com/mamao11/ToSAddons/assets/36460192/8520e950-4162-4253-bc09-487922a17035)  
+![image](https://github.com/mamao11/ToSAddons/assets/36460192/2e5445bf-3b41-4a46-8c52-c640e98aeade)  
 <br>
 下の方にスクロールすると**DeepL APIで使用する認証キー**の欄がある。  
-![image](https://github.com/mamao11/ToSAddons/assets/36460192/dff801c9-b8ea-4e43-82dd-d7436a584a7d)  
+![image](https://github.com/mamao11/ToSAddons/assets/36460192/7a37c938-2626-474a-95df-abf4b02ee133)  
 <br>
 <br>
